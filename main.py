@@ -65,7 +65,7 @@ if TRAIN_DATA:
     #print(training_data[0])
     #print(output)
 
-    cv2.imshow('asdsad', training_data[0][0])
+    cv2.imshow(f'{training_data[0][1]}', training_data[0][0])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 

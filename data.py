@@ -53,17 +53,24 @@ class SketchData():
                 path = self.TEST_PATH + '\\' + f
                 print(path)
                 img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
-                sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5)
-                sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=5)
-                img = sobelx + sobely
-                img = cv2.resize(img, (28, 28))
-                img = img/255.0
 
-                """
+                #I chose Inter_area interpolation because we are shrinking the image
+                img = cv2.resize(img, (28, 28), interpolation = cv2.INTER_AREA)
+
+
+                #sobelx = cv2.Sobel(img, cv2.CV_64F, 1, 0, ksize=5)
+                #sobely = cv2.Sobel(img, cv2.CV_64F, 0, 1, ksize=5)
+                #img = sobelx + sobely
+
+                #To ignore color info and to detect edges of the sketch I used laplacian derivative
+                img = cv2.Laplacian(img, cv2.CV_64F)
+                #img = img/255.0
+
+
                 cv2.imshow('asdsad', img)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
-                """
+
 
                 self.test_data.append((np.array(img), f))
             except Exception as e:
